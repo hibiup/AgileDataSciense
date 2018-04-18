@@ -15,10 +15,10 @@ on_time_dataframe = spark.read.format('com.databricks.spark.csv')\
     treatEmptyValuesAsNulls='true',
   )\
   .load('data/On_Time_On_Time_Performance_2018_1.csv.bz2')
-on_time_dataframe.registerTempTable("on_time_performance")
+on_time_dataframe.registerTempTable("on_time_information")
 
 # SparkSql
-trimmed_cast_performance = spark.sql("""
+trimmed_cast_information = spark.sql("""
 SELECT
   Year, Quarter, Month, DayofMonth, DayOfWeek, FlightDate,
   Carrier, TailNum, FlightNum,
@@ -35,29 +35,29 @@ SELECT
   cast(SecurityDelay as float), cast(LateAircraftDelay as float),
   CRSDepTime, CRSArrTime
 FROM
-  on_time_performance
+  on_time_information
 """
 )
 
-# Replace on_time_performance table# with our new, trimmed table.
-trimmed_cast_performance.registerTempTable("on_time_performance")
+# Replace on_time_information table# with our new, trimmed table.
+trimmed_cast_information.registerTempTable("on_time_information")
 
 # Evaluate date
-#trimmed_cast_performance.limit(10).show()
+#trimmed_cast_information.limit(10).show()
 #spark.sql("""
 #    SELECT
 #        SUM(WeatherDelay), SUM(CarrierDelay), SUM(NASDelay),
 #        SUM(SecurityDelay), SUM(LateAircraftDelay)
-#        FROM on_time_performance
+#        FROM on_time_information
 #"""
 #).show()
 
 # Save records to JSON and zip.
-#trimmed_cast_performance.toJSON()\
+#trimmed_cast_information.toJSON()\
 #    .saveAsTextFile(
-#        'data/on_time_performance.jsonl.gz',
+#        'data/on_time_information.jsonl.gz',
 #        'org.apache.hadoop.io.compress.GzipCodec'
 #)
 
 # Save records using Parquet
-trimmed_cast_performance.write.parquet("data/on_time_performance.parquet")
+trimmed_cast_information.write.parquet("data/on_time_information.parquet")

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>On Time Flight Information</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/static/bootstrap.min.css" rel="stylesheet">
+<link href="/static/bootstrap-theme.min.css" rel="stylesheet">
+</head>
+<body>
+<div id="wrap">
+<!-- Begin page content -->
+<div class="container">
+<div class="page-header">
+<h1>On Time Flight Information</h1>
+</div>
+{% block body %}
+    <div>
+    <p class="lead">Flight {{flight.FlightNum}}</p>
+    <table class="table">
+    <thead>
+    <th>Airline</th>
+    <th>Origin</th>
+    <th>Destination</th>
+    <th>Tail Number</th>
+    <th>Date</th>
+    <th>Air Time</th>
+    <th>Distance</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td>{{flight.Carrier}}</td>
+    <td>{{flight.Origin}}</td>
+    <td>{{flight.Dest}}</td>
+    <td>{{flight.TailNum}}</td>
+    <td>{{flight.FlightDate}}</td>
+    <td>{{flight.AirTime}}</td>
+    <td>{{flight.Distance}}</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+{% endblock %}
+</div>
+<div id="push"></div>
+</div>
+<div id="footer">
+<div class="container">
+
+</div>
+</div>
+<script src="/static/bootstrap.min.js"></script>
+</body>
+</html>

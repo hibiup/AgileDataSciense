@@ -6,13 +6,14 @@ from pyspark.sql import SparkSession
 # Important: activate pymongo_spark
 pymongo.activate()
 
-# Loading parquet
-# Init tial spark
+# Init spark
 spark = SparkSession \
     .builder \
     .appName("Agile Data Sciense - Data Cleaning") \
     .config('spark.jars.packages', 'org.mongodb.mongo-hadoop:mongo-hadoop-spark:2.0.2') \
     .getOrCreate()
+
+# Loading parquet
 on_time_dataframe = spark.read.parquet('data/on_time_information.parquet')
 df_length=on_time_dataframe.count()
 print("Records number: " + str(df_length))

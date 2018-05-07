@@ -35,11 +35,12 @@ $ docker exec -it mongodb mongo flightdb
         ...
 }
 > db.on_time_information.findOne({Carrier: 'AA', FlightDate: '2018-01-16', FlightNum: '228'})
+> db.on_time_information.find({Carrier: 'LAX', Dest: 'HNL', FlightDate: '2018-01-16'})
 ...
 ```
 
 # View data
-1) Run webui/on_time_information.py
+1) Run webui/__init__.py
 
 2) Visit: http://192.168.56.102:5000/on_time_information?Carrier=AA&FlightDate=2018-01-16&FlightNum=228
 
